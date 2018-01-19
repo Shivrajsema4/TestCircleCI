@@ -7,6 +7,9 @@ jobs:
      steps:
        - run: echo "hello world"
    task1:
+     working_directory: ~/build
+     machine:
+        image: circleci/classic:edge
      name: task1
      steps:
         - run:
