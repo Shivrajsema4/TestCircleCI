@@ -5,7 +5,6 @@ jobs:
      machine:
         image: circleci/classic:edge
      steps:
-       - checkout
        - run: echo "hello world"
    task1:
      name: task1
@@ -18,12 +17,8 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build:
-         type: approval
+      - build
       - task1:
-         filters:
-           branches:
-             only: master
          type: approval
          requires:
            - build
