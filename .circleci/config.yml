@@ -1,15 +1,33 @@
 version: 2
 jobs:
    build:
-     docker:
-       - image: circleci/java:8
+     working_directory: ~/build
+     machine:
+        image: circleci/classic:edge
      steps:
        - checkout
        - run: echo "hello world"
+   task1:
+     name: task1
+     steps:
+        - checkout:
+            path: $CIRCLE_PROJECT_REPONAME
+        - run:
+             name: Build cp-os-dashboard
+             shell: /bin/bash
+             command: |
+                
+                echo "task1 is done"
 workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build
+      - build:
          type: approval
-         
+      - task1:
+         filters:
+           branches:
+             only: master
+         type: approval
+         requires:
+           - build
