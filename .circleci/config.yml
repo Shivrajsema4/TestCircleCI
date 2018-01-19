@@ -10,14 +10,10 @@ jobs:
    task1:
      name: task1
      steps:
-        - checkout:
-            path: $CIRCLE_PROJECT_REPONAME
         - run:
              name: Build cp-os-dashboard
              shell: /bin/bash
-             command: |
-                
-                echo "task1 is done"
+             command: echo "task1 is done"
 workflows:
   version: 2
   build_and_deploy:
